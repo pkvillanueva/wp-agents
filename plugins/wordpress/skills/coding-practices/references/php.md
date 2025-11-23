@@ -167,6 +167,149 @@ function post_to_twitter() {
 }
 ```
 
+### PSR-4 Autoloading
+
+Follow PSR-4 autoloading standards for automatic class loading based on namespace and file structure.
+
+#### File Structure
+
+Organize files to match namespace structure:
+
+```
+plugins/my-plugin/
+├── composer.json
+├── my-plugin.php
+└── src/
+    ├── Admin/
+    │   ├── Settings.php
+    │   └── MetaBoxes.php
+    ├── Frontend/
+    │   └── Shortcodes.php
+    └── Core/
+        └── Plugin.php
+```
+
+#### composer.json Configuration
+
+Set up PSR-4 autoloading in your `composer.json`:
+
+```json
+{
+    "name": "company/my-plugin",
+    "autoload": {
+        "psr-4": {
+            "Company\\MyPlugin\\": "src/"
+        }
+    }
+}
+```
+
+#### Class Implementation
+
+Match file paths to namespaces. For `src/Admin/Settings.php`:
+
+```php
+<?php
+namespace Company\MyPlugin\Admin;
+
+/**
+ * Admin settings handler.
+ *
+ * @package Company\MyPlugin
+ */
+class Settings {
+
+    /**
+     * Initialize settings.
+     */
+    public function init() {
+        add_action( 'admin_menu', array( $this, 'add_menu' ) );
+    }
+
+    /**
+     * Add admin menu.
+     */
+    public function add_menu() {
+        // Menu registration logic
+    }
+}
+```
+
+#### Main Plugin File
+
+In your main plugin file, require the Composer autoloader:
+
+```php
+<?php
+/**
+ * Plugin Name: My Plugin
+ * Description: Example plugin using PSR-4 autoloading
+ * Version: 1.0.0
+ */
+
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
+// Require Composer autoloader
+require_once __DIR__ . '/vendor/autoload.php';
+
+// Initialize plugin
+use Company\MyPlugin\Core\Plugin;
+
+Plugin::instance();
+```
+
+#### PSR-4 Rules
+
+1. **One class per file** - Each file contains exactly one class
+2. **Namespace matches directory** - `Company\MyPlugin\Admin\Settings` lives in `src/Admin/Settings.php`
+3. **Case-sensitive** - File and directory names must match the case of the namespace and class name
+4. **No underscores in class names** - Use `AdminSettings`, not `Admin_Settings`
+5. **Fully qualified namespace** - Always use the complete namespace path
+
+#### Benefits
+
+- **No manual require/include** - Classes load automatically when used
+- **Better IDE support** - IDEs can navigate and autocomplete more effectively
+- **Modern PHP standard** - Follows PHP-FIG recommendations
+- **Composer ecosystem** - Seamlessly integrates with Composer packages
+- **Scalability** - Makes large codebases more maintainable
+
+#### ✅ Do: Use PSR-4 for modern plugins
+
+```php
+<?php
+namespace Company\MyPlugin\Frontend;
+
+/**
+ * Handles frontend shortcodes.
+ */
+class Shortcodes {
+
+    public function register() {
+        add_shortcode( 'my_shortcode', array( $this, 'render' ) );
+    }
+
+    public function render( $atts ) {
+        // Shortcode rendering logic
+    }
+}
+```
+
+#### ❌ Don't: Mix PSR-4 with manual includes
+
+```php
+<?php
+// Don't do this when using PSR-4
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-settings.php';
+
+// Let autoloader handle it instead
+use Company\MyPlugin\Admin\Settings;
+$settings = new Settings();
+```
+
 ### Object Design
 
 Objects should be well-defined, atomic, and fully documented.
