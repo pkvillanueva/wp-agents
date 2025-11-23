@@ -1,0 +1,19 @@
+{
+  "name": "wordpress",
+  "version": "0.1.0",
+  "description": "WordPress development plugin with specialized agents, commands, and tools for WordPress plugin and theme development",
+  "author": {
+    "name": "Patrick Villanueva",
+    "email": "pkrvillanueva@gmail.com"
+  },
+  "license": "MIT",
+  "keywords": [
+    "wordpress",
+    "php",
+    "plugin",
+    "theme",
+    "woocommerce",
+    "development"
+  ],
+  "skills": "./skills/"
+}

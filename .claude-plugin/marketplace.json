@@ -1,0 +1,14 @@
+{
+  "name": "wp-agents",
+  "owner": {
+    "name": "Patrick Villanueva",
+    "email": "pkrvillanueva@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "wordpress",
+      "source": "./plugins/wordpress",
+      "description": "Plugin under development"
+    }
+  ]
+}
