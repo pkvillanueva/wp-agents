@@ -15,5 +15,7 @@
     "woocommerce",
     "development"
   ],
+  "agents": ["./agents/plugin-reviewer.md"],
+  "commands": "./commands",
   "skills": "./skills/"
 }
