@@ -14,12 +14,17 @@ Review all modified and staged files in this WordPress plugin repository and cre
 
 Create a commit message following this format:
 - **First line**: Short summary (50 chars max), use conventional commit prefixes:
-  - `fix:` for bug fixes
   - `feat:` for new features
+  - `fix:` for bug fixes
+  - `docs:` for documentation changes
+  - `style:` for formatting (no code change)
   - `refactor:` for code refactoring
-  - `docs:` for documentation
+  - `test:` for adding or updating tests
   - `chore:` for maintenance tasks
-  - `style:` for formatting changes
+  - `perf:` for performance improvements
+  - `ci:` for CI/CD changes
+  - `build:` for build system changes
+  - `revert:` for reverting previous commits
 - **Body** (optional): Only include if the changes are complex and need explanation. Keep it minimal (1-2 lines max).
 
 ## Rules
